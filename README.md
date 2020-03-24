@@ -44,13 +44,14 @@ D-Tale was the product of a SAS to Python conversion.  What was originally a per
     - [Describe](#describe), [Filter](#filter), [Building Columns](#building-columns), [Reshape](#reshape), [Charts](#charts), [Coverage (Deprecated)](#coverage-deprecated), [Correlations](#correlations), [Heat Map](#heat-map), [Instances](#instances), [Code Exports](#code-exports), [About](#about), [Resize](#resize), [Shutdown](#shutdown)
   - [Column Menu Functions](#column-menu-functions)
     - [Filtering](#filtering), [Moving Columns](#moving-columns), [Hiding Columns](#hiding-columns), [Lock](#lock), [Unlock](#unlock), [Sorting](#sorting), [Formats](#formats), [Column Analysis](#column-analysis)
-  - [Menu Functions within a Jupyter Notebook](#menu-functions-within-a-jupyter-notebook)
+  - [Menu Functions Depending on Browser Dimensions](#menu-functions-depending-on-browser-dimensions)
 - [For Developers](#for-developers)
   - [Cloning](#cloning)
   - [Running Tests](#running-tests)
   - [Linting](#linting)
   - [Formatting JS](#formatting-js)
   - [Docker Development](#docker-development)
+- [Global State/Data Storage](#global-state_data-storage)
 - [Startup Behavior](#startup-behavior)
 - [Documentation](#documentation)
 - [Requirements](#requirements)
@@ -476,6 +477,11 @@ d.offline_chart(chart_type='bar', x='x', y='z3', agg='sum')
 ```
 [![](http://img.youtube.com/vi/DseSmc3fZvc/0.jpg)](http://www.youtube.com/watch?v=DseSmc3fZvc "Offline Charts Tutorial")
 
+**Pro Tip: If generating offline charts in jupyter notebooks and you run out of memory please add the following to your command-line when starting jupyter**
+
+`--NotebookApp.iopub_data_rate_limit=1.0e10`
+
+
 **Disclaimer: Long Running Chart Requests**
 
 If you choose to build a chart that requires a lot of computational resources then it will take some time to run.  Based on the way Flask & plotly/dash interact this will block you from performing any other request until it completes.  There are two courses of action in this situation:
@@ -786,7 +792,7 @@ $ python
 Then view your D-Tale instance in your browser using the link that gets printed
 
 
-### Global State/Data Storage
+## Global State/Data Storage
 
 If D-Tale is running in an environment with multiple python processes (ex: on a web server running [gunicorn](https://github.com/benoitc/gunicorn)) it will most likely encounter issues with inconsistent state.  Developers can fix this by configuring the system D-Tale uses for storing data.  Detailed documentation is available here: [Data Storage and managing Global State](https://github.com/man-group/dtale/blob/master/docs/GLOBAL_STATE.md)
 
